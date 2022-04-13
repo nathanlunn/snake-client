@@ -13,6 +13,10 @@ const connect = function () {
     console.log('Connection Established!');
   });
 
+  conn.on('connect', () => {
+    conn.write('Name: ELE');
+  });
+
   conn.on('data', data => {
     console.log(`Message from server: ${data}`)
   }) 
