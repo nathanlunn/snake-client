@@ -1,9 +1,7 @@
 const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const { w, a, s, d } = require('./constants');
+const keys = { w, a, s, d };
+console.log(keys);
 
 let connection;
 
@@ -12,19 +10,15 @@ const handleUserInput = function (key) {
   if (key === '\u0003') {
     process.exit();
   }
-  if (key === 'w') {
-    connection.write('Move: up');
-  }
-  if (key === 's') {
-    connection.write(`Move: down`);
-  }
-  if (key === 'a') {
-    connection.write(`Move: left`);
-  }
-  if (key === 'd') {
-    connection.write(`Move: right`);
+  if (Object.keys(keys).includes(key)) {
+    console.log(keys[key])
+    connection.write(`${keys[key]}`);
   }
   if (key === '\u0009') {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
     rl.question('Smack Talk:', smack => connection.write(`Say: ${smack}`));
   }
 };
