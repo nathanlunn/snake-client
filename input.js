@@ -1,4 +1,9 @@
-// const {connect} = require('./client');
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 let connection;
 
@@ -18,6 +23,9 @@ const handleUserInput = function (key) {
   }
   if (key === 'd') {
     connection.write(`Move: right`);
+  }
+  if (key === '\u0009') {
+    rl.question('Smack Talk:', smack => connection.write(`Say: ${smack}`));
   }
 };
 
